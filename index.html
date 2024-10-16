@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Checklist Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .question { margin-bottom: 20px; }
+        .result { font-weight: bold; margin-top: 20px; }
+        button { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Privacy Checklist for Small Business</h1>
+    <p>Answer the following questions to determine if your small business needs to comply with the Privacy Act.</p>
+
+    <div id="quiz">
+        <!-- Questions will be inserted here -->
+    </div>
+    <div class="result" id="result"></div>
+    <button onclick="startQuiz()">Start Quiz</button>
+
+    <script>
+        const questions = [
+            {
+                text: "Does your small business handle personal information?",
+                yes: 1,
+                no: "You do not need to comply with the APPs."
+            },
+            {
+                text: "Has your small business had an annual turnover of more than $3,000,000 in any financial year since 2002?",
+                yes: "You need to comply with the APPs.",
+                no: 2
+            },
+            {
+                text: "Does your small business trade in personal information?",
+                yes: 3,
+                no: 4
+            },
+            {
+                text: "Does your small business trade in personal information without the consent of the individual and without being required or authorised by law?",
+                yes: "You need to comply with the APPs.",
+                no: 4
+            },
+            {
+                text: "Is your small business a health service provider?",
+                yes: "You need to comply with the APPs.",
+                no: 5
+            },
+            {
+                text: "Is your small business related to a larger body corporate that is subject to the Privacy Act?",
+                yes: "You need to comply with the APPs.",
+                no: 6
+            },
+            {
+                text: "Is your small business a Commonwealth contracted service provider?",
+                yes: "You need to comply with the APPs. Check your contract for more information about your privacy obligations.",
+                no: 7
+            },
+            {
+                text: "Are you a reporting entity or authorised agent under the AML/CTF Act?",
+                yes: "You need to comply with the APPs for your activities in relation to the AML/CTF Act.",
+                no: 8
+            },
+            {
+                text: "Does your small business operate a residential tenancy database?",
+                yes: "You need to comply with the APPs.",
+                no: 9
+            },
+            {
+                text: "Does your small business carry on a credit reporting business?",
+                yes: "You need to comply with Part IIIA of the Privacy Act.",
+                no: 10
+            },
+            {
+                text: "Is your small business an employee association under the Fair Work Act?",
+                yes: "You need to comply with the APPs.",
+                no: 11
+            },
+            {
+                text: "Is your small business a protected action ballot agent?",
+                yes: "You need to comply with the APPs.",
+                no: 12
+            },
+            {
+                text: "Is your small business a service provider that complies with data retention provisions under the Telecommunications Act?",
+                yes: "You need to comply with the APPs for your data retention activities.",
+                no: 13
+            },
+            {
+                text: "Does your small business hold accreditation for the Consumer Data Right system?",
+                yes: "You need to comply with the APPs.",
+                no: 14
+            },
+            {
+                text: "Has your small business voluntarily opted into the Privacy Act?",
+                yes: "You need to comply with the APPs.",
+                no: "You do not need to comply with the Privacy Act."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function startQuiz() {
+            currentQuestion = 0;
+            document.getElementById('result').innerHTML = '';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            const quizDiv = document.getElementById('quiz');
+            quizDiv.innerHTML = `
+                <div class="question">
+                    <p>${question.text}</p>
+                    <button onclick="answer('yes')">Yes</button>
+                    <button onclick="answer('no')">No</button>
+                </div>
+            `;
+        }
+
+        function answer(response) {
+            const question = questions[currentQuestion];
+            const next = question[response];
+            if (typeof next === 'number') {
+                currentQuestion = next;
+                showQuestion();
+            } else {
+                document.getElementById('result').innerHTML = next;
+                document.getElementById('quiz').innerHTML = '';
+            }
+        }
+    </script>
+</body>
+</html>
